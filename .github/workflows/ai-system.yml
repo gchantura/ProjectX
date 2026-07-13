@@ -47,7 +47,7 @@ jobs:
         run: docker buildx build --file Dockerfile.migrate --provenance=mode=max --sbom=true --output=type=oci,dest=/tmp/kcevagent-migrate.oci.tar .
       - name: Build recovery container with provenance and SBOM
         run: docker buildx build --file Dockerfile.recovery --provenance=mode=max --sbom=true --output=type=oci,dest=/tmp/kcevagent-recovery.oci.tar .
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: kcevagent-oci-${{ github.sha }}
           path: |
