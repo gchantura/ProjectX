@@ -40,7 +40,7 @@ jobs:
           node tools/capacity-test.mjs --url http://127.0.0.1:3099/api/modules --requests 600 --concurrency 30 --p95-ms 750 --max-error-rate 0.01
       - name: Production dependency audit
         run: npm audit --omit=dev --audit-level=high
-      - uses: docker/setup-buildx-action@v3
+      - uses: docker/setup-buildx-action@v4
       - name: Build production container with provenance and SBOM
         run: docker buildx build --provenance=mode=max --sbom=true --output=type=oci,dest=/tmp/kcevagent.oci.tar .
       - name: Build migration container with provenance and SBOM
