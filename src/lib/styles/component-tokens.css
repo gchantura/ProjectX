@@ -1,0 +1,11 @@
+:root {
+	--component-radius-container: var(--radius-none);
+	--component-radius-control: var(--radius-xs);
+	--component-radius-status: var(--radius-xs);
+	--component-border: var(--dimension-1) solid var(--border-subtle);
+	--component-border-strong: var(--dimension-1) solid var(--border-strong);
+	--component-shadow-panel: var(--shadow-none);
+	--component-section-padding: var(--spacing-5);
+	--component-row-height: var(--dimension-52);
+	--component-focus-width: var(--dimension-2);
+}

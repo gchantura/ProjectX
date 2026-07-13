@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kcevagent-backups
+  labels: { app.kubernetes.io/name: kcevagent, app.kubernetes.io/component: recovery }
+spec:
+  accessModes: [ReadWriteMany]
+  resources:
+    requests: { storage: 50Gi }
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kcevagent-backup
+  labels: { app.kubernetes.io/name: kcevagent, app.kubernetes.io/component: recovery }
+spec:
+  schedule: "17 1 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 7200
+      template:
+        spec:
+          restartPolicy: Never
+          securityContext: { runAsNonRoot: true, runAsUser: 999, runAsGroup: 999, fsGroup: 999, seccompProfile: { type: RuntimeDefault } }
+          containers:
+            - name: backup
+              image: ghcr.io/example/kcevagent-recovery@sha256:0000000000000000000000000000000000000000000000000000000000000000
+              env:
+                - { name: DATABASE_URL, valueFrom: { secretKeyRef: { name: kcevagent-secrets, key: DATABASE_URL } } }
+                - { name: BACKUP_ENCRYPTION_PASSWORD, valueFrom: { secretKeyRef: { name: kcevagent-recovery, key: encryption-password } } }
+                - { name: BACKUP_RETENTION_DAYS, value: "35" }
+              securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+              resources: { requests: { cpu: 100m, memory: 128Mi }, limits: { cpu: "1", memory: 1Gi } }
+              volumeMounts: [{ name: backups, mountPath: /backups }, { name: tmp, mountPath: /tmp }]
+          volumes: [{ name: backups, persistentVolumeClaim: { claimName: kcevagent-backups } }, { name: tmp, emptyDir: { sizeLimit: 2Gi } }]
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kcevagent-restore-drill
+  labels: { app.kubernetes.io/name: kcevagent, app.kubernetes.io/component: recovery }
+spec:
+  schedule: "43 3 1 * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 10800
+      template:
+        spec:
+          restartPolicy: Never
+          securityContext: { runAsNonRoot: true, runAsUser: 999, runAsGroup: 999, fsGroup: 999, seccompProfile: { type: RuntimeDefault } }
+          containers:
+            - name: isolated-postgres
+              image: postgres:17.5-bookworm
+              env: [{ name: POSTGRES_HOST_AUTH_METHOD, value: trust }, { name: POSTGRES_DB, value: restore }]
+              securityContext: { allowPrivilegeEscalation: false, capabilities: { drop: ["ALL"] } }
+              resources: { requests: { cpu: 100m, memory: 256Mi }, limits: { cpu: "1", memory: 1Gi } }
+              volumeMounts: [{ name: restore-data, mountPath: /var/lib/postgresql/data }]
+            - name: verify
+              image: ghcr.io/example/kcevagent-recovery@sha256:0000000000000000000000000000000000000000000000000000000000000000
+              command: ["/bin/sh", "-c"]
+              args: ["export BACKUP_FILE=$(find /backups -maxdepth 1 -name 'kcevagent-*.dump.tar.enc' -type f | sort | tail -1); exec /usr/local/bin/restore-verify.sh"]
+              env:
+                - { name: RESTORE_DATABASE_URL, value: postgresql://postgres@127.0.0.1:5432/restore }
+                - { name: ALLOW_DESTRUCTIVE_RESTORE, value: verify-isolated-database }
+                - { name: BACKUP_ENCRYPTION_PASSWORD, valueFrom: { secretKeyRef: { name: kcevagent-recovery, key: encryption-password } } }
+              securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+              resources: { requests: { cpu: 100m, memory: 128Mi }, limits: { cpu: "1", memory: 1Gi } }
+              volumeMounts: [{ name: backups, mountPath: /backups, readOnly: true }, { name: tmp, mountPath: /tmp }]
+          volumes: [{ name: backups, persistentVolumeClaim: { claimName: kcevagent-backups } }, { name: restore-data, emptyDir: { sizeLimit: 10Gi } }, { name: tmp, emptyDir: { sizeLimit: 2Gi } }]

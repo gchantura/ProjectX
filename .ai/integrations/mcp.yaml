@@ -1,0 +1,28 @@
+version: 1
+servers:
+  project:
+    enabled: true
+    trust: local
+    provider: repository
+    description: Framework-neutral project discovery, complexity, planning, and validation.
+    command: node
+    args:
+      - tools/project-mcp.mjs
+  svelte:
+    enabled: true
+    trust: official
+    provider: sveltejs
+    description: Svelte documentation and code assistance for this project's current framework.
+    command: npx
+    args:
+      - -y
+      - "@sveltejs/mcp"
+  tailwind:
+    enabled: true
+    trust: community
+    provider: third-party
+    description: Optional Tailwind documentation tools; review and pin before sensitive use.
+    command: npx
+    args:
+      - -y
+      - tailwindcss-mcp-server@0.1.1

@@ -1,0 +1,11 @@
+.git
+.svelte-kit
+build
+dist
+node_modules
+.kcevagent
+.env
+.env.*
+!.env.example
+*.log
+*.png

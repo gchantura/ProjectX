@@ -1,0 +1,57 @@
+name: Quality and supply chain
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.13.0
+          cache: npm
+      - run: npm ci
+      - name: Generated architecture contract
+        run: npm run ai:check
+      - name: Design-token contract
+        run: npm run ui:check
+      - name: Automated tests
+        run: npm run ai:test
+      - name: Production build and package validation
+        run: npm run build
+      - name: Capacity and latency contract
+        run: |
+          NODE_ENV=development KCEV_AUTH_REQUIRED=false KCEV_RATE_LIMIT_PER_MINUTE=10000 KCEV_MAX_INFLIGHT_REQUESTS=100 HOST=127.0.0.1 PORT=3099 node tools/server.mjs > /tmp/kcevagent-capacity.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          node tools/capacity-test.mjs --url http://127.0.0.1:3099/api/modules --requests 600 --concurrency 30 --p95-ms 750 --max-error-rate 0.01
+      - name: Production dependency audit
+        run: npm audit --omit=dev --audit-level=high
+      - uses: docker/setup-buildx-action@v3
+      - name: Build production container with provenance and SBOM
+        run: docker buildx build --provenance=mode=max --sbom=true --output=type=oci,dest=/tmp/kcevagent.oci.tar .
+      - name: Build migration container with provenance and SBOM
+        run: docker buildx build --file Dockerfile.migrate --provenance=mode=max --sbom=true --output=type=oci,dest=/tmp/kcevagent-migrate.oci.tar .
+      - name: Build recovery container with provenance and SBOM
+        run: docker buildx build --file Dockerfile.recovery --provenance=mode=max --sbom=true --output=type=oci,dest=/tmp/kcevagent-recovery.oci.tar .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kcevagent-oci-${{ github.sha }}
+          path: |
+            /tmp/kcevagent.oci.tar
+            /tmp/kcevagent-migrate.oci.tar
+            /tmp/kcevagent-recovery.oci.tar
+          retention-days: 14

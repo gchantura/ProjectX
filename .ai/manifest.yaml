@@ -1,0 +1,54 @@
+version: 1
+project:
+  name: kcevagent
+  description: Framework-neutral, AI-operable project with generated context and enforceable quality gates.
+  source_roots:
+    - src
+    - static
+    - tools
+  exclude:
+    - node_modules
+    - .git
+    - .svelte-kit
+    - .vercel
+    - dist
+    - .ai/generated
+context:
+  canonical_entry: .ai/policies/workflow.md
+  architecture: .ai/architecture/overview.md
+  decisions: .ai/architecture/decisions
+  generated_map: .ai/architecture/map.json
+  human_map: PROJECT_MAP.md
+adapters:
+  - AGENTS.md
+  - CLAUDE.md
+  - GEMINI.md
+  - .github/copilot-instructions.md
+skills:
+  canonical: .ai/skills/manage-project/SKILL.md
+  adapters:
+    - .agents/skills/manage-project/SKILL.md
+    - .claude/skills/manage-project/SKILL.md
+    - .gemini/skills/manage-project/SKILL.md
+integrations:
+  mcp_registry: .ai/integrations/mcp.yaml
+  generated_config: .mcp.json
+quality:
+  commands:
+    context: npm run ai:check
+    package: npm run prepack
+  require_clean_context: true
+complexity:
+  default_on_uncertainty: higher
+  approval_level: null
+  thresholds:
+    trivial: 1
+    local: 4
+    structural: 8
+  protected_paths:
+    - .env*
+    - "**/migrations/**"
+    - "**/auth/**"
+    - "**/payments/**"
+    - "**/billing/**"
+    - "**/secrets/**"

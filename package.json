@@ -1,0 +1,74 @@
+{
+	"name": "kcevagent",
+	"version": "0.0.1",
+	"packageManager": "npm@11.16.0",
+	"engines": { "node": ">=24.13.0 <25", "npm": ">=11.6.0 <12" },
+	"scripts": {
+		"dev": "node --env-file=.env node_modules/vite/bin/vite.js dev",
+		"build": "npm run ui:check && npm run ai:check && vite build && npm run prepack",
+		"preview": "vite preview",
+		"start": "node tools/server.mjs",
+		"capacity:test": "node tools/capacity-test.mjs",
+		"prepare": "svelte-kit sync || echo ''",
+		"prepack": "svelte-kit sync && svelte-package && publint",
+		"ai:sync": "node tools/ai-system/cli.mjs sync",
+		"ai:check": "node tools/ai-system/cli.mjs check",
+		"ai:generate": "npm run ai:sync",
+		"ai:validate": "npm run ai:check && npm run ai:test",
+		"ai:assess": "node tools/ai-system/cli.mjs assess",
+		"ai:test": "node --env-file=.env.test --test --test-concurrency=1 tools/*.test.mjs tools/ai-system/*.test.mjs src/lib/agent/*.test.mjs src/lib/agent/providers/*.test.mjs src/lib/server/*.test.mjs",
+		"ui:check": "node tools/check-design-tokens.mjs",
+		"auth:operator": "node tools/create-operator-token.mjs",
+		"secrets:rotate": "node tools/rotate-oidc-secrets.mjs",
+		"context:sync": "npm run ai:sync",
+		"context:check": "npm run ai:check",
+		"mcp:project": "node tools/project-mcp.mjs"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"peerDependencies": {
+		"svelte": "^5.0.0"
+	},
+	"devDependencies": {
+		"@modelcontextprotocol/sdk": "^1.29.0",
+		"@sveltejs/adapter-node": "^5.5.7",
+		"@sveltejs/adapter-vercel": "^6.3.3",
+		"@sveltejs/kit": "^2.63.0",
+		"@sveltejs/package": "^2.5.8",
+		"@sveltejs/vite-plugin-svelte": "^7.1.2",
+		"@tailwindcss/forms": "^0.5.11",
+		"@tailwindcss/typography": "^0.5.19",
+		"@tailwindcss/vite": "^4.3.0",
+		"publint": "^0.3.21",
+		"svelte": "^5.56.1",
+		"tailwindcss": "^4.3.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.0.16",
+		"yaml": "^2.9.0",
+		"zod": "^4.4.3"
+	},
+	"keywords": [
+		"svelte"
+	],
+	"dependencies": {
+		"jose": "^6.2.3"
+	},
+	"overrides": {
+		"cookie": "^0.7.2"
+	}
+}

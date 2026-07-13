@@ -1,0 +1,69 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kcevagent
+  labels: { app.kubernetes.io/name: kcevagent }
+spec:
+  selector:
+    matchLabels: { app.kubernetes.io/name: kcevagent }
+  endpoints:
+    - port: http
+      path: /api/metrics
+      interval: 30s
+      scrapeTimeout: 10s
+      authorization:
+        credentials:
+          name: kcevagent-monitoring
+          key: token
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kcevagent
+  labels: { app.kubernetes.io/name: kcevagent }
+spec:
+  groups:
+    - name: kcevagent.availability
+      rules:
+        - alert: KcevAgentReplicaDown
+          expr: up{job=~".*kcevagent.*"} == 0
+          for: 5m
+          labels: { severity: critical }
+          annotations:
+            summary: KcevAgent replica is not scrapeable
+            runbook_url: https://example.invalid/kcevagent/runbooks/replica-down
+        - alert: KcevAgentHighServerErrorRate
+          expr: sum(rate(kcev_http_requests_total{status=~"5.."}[5m])) / clamp_min(sum(rate(kcev_http_requests_total[5m])), 0.001) > 0.05
+          for: 10m
+          labels: { severity: critical }
+          annotations:
+            summary: KcevAgent HTTP 5xx rate exceeds 5 percent
+            runbook_url: https://example.invalid/kcevagent/runbooks/high-error-rate
+        - alert: KcevAgentAuditPersistenceFailure
+          expr: increase(kcev_audit_write_failures_total[5m]) > 0
+          for: 1m
+          labels: { severity: critical }
+          annotations:
+            summary: Security audit evidence could not be persisted
+            runbook_url: https://example.invalid/kcevagent/runbooks/audit-failure
+        - alert: KcevAgentAdmissionBackendFailure
+          expr: increase(kcev_rate_limit_backend_failures_total[5m]) > 0
+          for: 1m
+          labels: { severity: critical }
+          annotations:
+            summary: Shared request admission is unavailable
+            runbook_url: https://example.invalid/kcevagent/runbooks/admission-failure
+        - alert: KcevAgentReplicaSaturated
+          expr: increase(kcev_request_admission_rejections_total[5m]) > 10
+          for: 5m
+          labels: { severity: warning }
+          annotations:
+            summary: KcevAgent replica is rejecting traffic at its concurrency limit
+            runbook_url: https://example.invalid/kcevagent/runbooks/replica-saturated
+        - alert: KcevAgentLeaseContention
+          expr: increase(kcev_agent_run_lease_contention_total[15m]) > 5
+          for: 5m
+          labels: { severity: warning }
+          annotations:
+            summary: Run workers are repeatedly contending for leases
+            runbook_url: https://example.invalid/kcevagent/runbooks/lease-contention

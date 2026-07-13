@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "project": {
+      "command": "node",
+      "args": [
+        "tools/project-mcp.mjs"
+      ]
+    },
+    "svelte": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sveltejs/mcp"
+      ]
+    },
+    "tailwind": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tailwindcss-mcp-server@0.1.1"
+      ]
+    }
+  }
+}

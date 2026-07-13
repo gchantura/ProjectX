@@ -1,0 +1,7 @@
+FROM postgres:17.5-bookworm
+WORKDIR /migrations
+COPY supabase/migrations ./sql
+COPY tools/migrate.sh ./migrate.sh
+RUN chmod 0555 ./migrate.sh && chown -R postgres:postgres /migrations
+USER postgres
+ENTRYPOINT ["/migrations/migrate.sh"]

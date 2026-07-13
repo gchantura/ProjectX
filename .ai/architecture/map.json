@@ -1,0 +1,3205 @@
+{
+  "_generated": "GENERATED FILE. DO NOT EDIT MANUALLY. Run npm run ai:sync.",
+  "schema_version": 1,
+  "index_kind": "navigation",
+  "limitations": "This is a navigation index, not complete architecture or semantic code intelligence.",
+  "project": {
+    "name": "kcevagent",
+    "description": "Framework-neutral, AI-operable project with generated context and enforceable quality gates.",
+    "source_roots": [
+      "src",
+      "static",
+      "tools"
+    ],
+    "exclude": [
+      "node_modules",
+      ".git",
+      ".svelte-kit",
+      ".vercel",
+      "dist",
+      ".ai/generated"
+    ]
+  },
+  "package": {
+    "name": "kcevagent",
+    "version": "0.0.1",
+    "scripts": {
+      "dev": "node --env-file=.env node_modules/vite/bin/vite.js dev",
+      "build": "npm run ui:check && npm run ai:check && vite build && npm run prepack",
+      "preview": "vite preview",
+      "start": "node tools/server.mjs",
+      "capacity:test": "node tools/capacity-test.mjs",
+      "prepare": "svelte-kit sync || echo ''",
+      "prepack": "svelte-kit sync && svelte-package && publint",
+      "ai:sync": "node tools/ai-system/cli.mjs sync",
+      "ai:check": "node tools/ai-system/cli.mjs check",
+      "ai:generate": "npm run ai:sync",
+      "ai:validate": "npm run ai:check && npm run ai:test",
+      "ai:assess": "node tools/ai-system/cli.mjs assess",
+      "ai:test": "node --env-file=.env.test --test --test-concurrency=1 tools/*.test.mjs tools/ai-system/*.test.mjs src/lib/agent/*.test.mjs src/lib/agent/providers/*.test.mjs src/lib/server/*.test.mjs",
+      "ui:check": "node tools/check-design-tokens.mjs",
+      "auth:operator": "node tools/create-operator-token.mjs",
+      "secrets:rotate": "node tools/rotate-oidc-secrets.mjs",
+      "context:sync": "npm run ai:sync",
+      "context:check": "npm run ai:check",
+      "mcp:project": "node tools/project-mcp.mjs"
+    },
+    "dependencies": {
+      "jose": "^6.2.3",
+      "@modelcontextprotocol/sdk": "^1.29.0",
+      "@sveltejs/adapter-node": "^5.5.7",
+      "@sveltejs/adapter-vercel": "^6.3.3",
+      "@sveltejs/kit": "^2.63.0",
+      "@sveltejs/package": "^2.5.8",
+      "@sveltejs/vite-plugin-svelte": "^7.1.2",
+      "@tailwindcss/forms": "^0.5.11",
+      "@tailwindcss/typography": "^0.5.19",
+      "@tailwindcss/vite": "^4.3.0",
+      "publint": "^0.3.21",
+      "svelte": "^5.56.1",
+      "tailwindcss": "^4.3.0",
+      "typescript": "^6.0.3",
+      "vite": "^8.0.16",
+      "yaml": "^2.9.0",
+      "zod": "^4.4.3"
+    }
+  },
+  "source_digest": "027993e7256d025d",
+  "files": [
+    {
+      "path": "src/app.html",
+      "bytes": 447,
+      "digest": "182db9dade0e8117",
+      "extension": ".html",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "lightweight-patterns"
+    },
+    {
+      "path": "src/hooks.server.js",
+      "bytes": 6849,
+      "digest": "6ffcd1785523a065",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/auditStore.server.js",
+        "$lib/server/identityLifecycleStore.server.js",
+        "$lib/server/security.js",
+        "$lib/server/telemetry.js",
+        "$lib/server/tenantContext.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/agentPipeline.server.js",
+      "bytes": 22419,
+      "digest": "344a50c9e93c7f5c",
+      "extension": ".js",
+      "imports": [
+        "./autonomyPolicy.js",
+        "./memoryStore.server.js",
+        "./providers/openai.server.js",
+        "./runBudget.server.js",
+        "./toolRegistry.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "createProviderStepMaterializer"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/agentPipeline.server.test.mjs",
+      "bytes": 11155,
+      "digest": "c6849f4c12502fd3",
+      "extension": ".mjs",
+      "imports": [
+        "./agentPipeline.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/auditExport.server.js",
+      "bytes": 2308,
+      "digest": "3ce28acb14b39700",
+      "extension": ".js",
+      "imports": [
+        "./diagnostics.server.js",
+        "./runStore.server.js",
+        "./supabaseStore.server.js",
+        "./taskGraph.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/auditExport.server.test.mjs",
+      "bytes": 2805,
+      "digest": "c03add4343724f7c",
+      "extension": ".mjs",
+      "imports": [
+        "./auditExport.server.js",
+        "./runStore.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/automation.server.js",
+      "bytes": 4471,
+      "digest": "8961013b395e68a3",
+      "extension": ".js",
+      "imports": [
+        "../server/telemetry.js",
+        "./diagnostics.server.js",
+        "./providerRegistry.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/automation.server.test.mjs",
+      "bytes": 2271,
+      "digest": "61d2fe71d4945a9d",
+      "extension": ".mjs",
+      "imports": [
+        "./automation.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/autonomyPolicy.js",
+      "bytes": 1308,
+      "digest": "dc10fbf03e80a942",
+      "extension": ".js",
+      "imports": [],
+      "exports": [
+        "autonomyDescription",
+        "isToolAllowedForAutonomy",
+        "normalizeAutonomyMode",
+        "toolsForAutonomy"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/diagnostics.server.js",
+      "bytes": 17397,
+      "digest": "675af392a356263b",
+      "extension": ".js",
+      "imports": [
+        "../server/auditStore.server.js",
+        "../server/identityStore.server.js",
+        "../server/oidc.server.js",
+        "../server/oidcConnectionStore.server.js",
+        "../server/rateLimitStore.server.js",
+        "./providerRegistry.server.js",
+        "./providers/ollama.server.js",
+        "./runStore.server.js",
+        "./supabaseStore.server.js",
+        "node:fs/promises",
+        "node:os",
+        "node:path"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/diagnostics.server.test.mjs",
+      "bytes": 7329,
+      "digest": "b686d0759fced859",
+      "extension": ".mjs",
+      "imports": [
+        "./diagnostics.server.js",
+        "./runStore.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/executionContext.server.js",
+      "bytes": 4649,
+      "digest": "55cbd130117094ee",
+      "extension": ".js",
+      "imports": [
+        "./supabaseStore.server.js",
+        "node:crypto",
+        "node:path"
+      ],
+      "exports": [
+        "createExecutionContext",
+        "policySnapshot",
+        "validateExecutionContext"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/executionContext.server.test.mjs",
+      "bytes": 2462,
+      "digest": "fc246ae38f7c0f57",
+      "extension": ".mjs",
+      "imports": [
+        "./executionContext.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/governance.server.js",
+      "bytes": 7825,
+      "digest": "d60dd7747fcf6942",
+      "extension": ".js",
+      "imports": [
+        "./diagnostics.server.js",
+        "./providerRegistry.server.js"
+      ],
+      "exports": [
+        "async",
+        "evaluateGovernanceReport"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/governance.server.test.mjs",
+      "bytes": 4026,
+      "digest": "a6f6a16af74e17ac",
+      "extension": ".mjs",
+      "imports": [
+        "./governance.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/impactAnalyzer.server.js",
+      "bytes": 4553,
+      "digest": "96429c545ab3a322",
+      "extension": ".js",
+      "imports": [
+        "node:fs/promises",
+        "node:path"
+      ],
+      "exports": [
+        "async",
+        "formatImpactReport"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/impactAnalyzer.server.test.mjs",
+      "bytes": 1768,
+      "digest": "f323d59f9c04e4e1",
+      "extension": ".mjs",
+      "imports": [
+        "./impactAnalyzer.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [
+        "core",
+        "default"
+      ],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/memoryStore.server.js",
+      "bytes": 5326,
+      "digest": "96cbedf70cadc845",
+      "extension": ".js",
+      "imports": [
+        "./supabaseStore.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "formatMemoryContext"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/memoryStore.server.test.mjs",
+      "bytes": 5029,
+      "digest": "42abb0f1d761bfc2",
+      "extension": ".mjs",
+      "imports": [
+        "./memoryStore.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/moduleRegistry.server.js",
+      "bytes": 2392,
+      "digest": "d9dcfb57baabec5f",
+      "extension": ".js",
+      "imports": [
+        "./runtime.js"
+      ],
+      "exports": [
+        "getModuleReadiness",
+        "listModuleReadiness"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/moduleRegistry.server.test.mjs",
+      "bytes": 1434,
+      "digest": "25818a9a81cf4282",
+      "extension": ".mjs",
+      "imports": [
+        "./moduleRegistry.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/operationsReport.server.js",
+      "bytes": 8575,
+      "digest": "2d10b4a36296f1de",
+      "extension": ".js",
+      "imports": [
+        "./diagnostics.server.js",
+        "./providerRegistry.server.js",
+        "./runStore.server.js"
+      ],
+      "exports": [
+        "async",
+        "evaluateOperationsReport"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/operationsReport.server.test.mjs",
+      "bytes": 2662,
+      "digest": "7c987e0375779076",
+      "extension": ".mjs",
+      "imports": [
+        "./operationsReport.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/projectReadiness.server.js",
+      "bytes": 3483,
+      "digest": "f73cb90803dfbcb5",
+      "extension": ".js",
+      "imports": [
+        "./projectStore.server.js",
+        "node:child_process",
+        "node:fs/promises",
+        "node:path",
+        "node:util"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/projectReadiness.server.test.mjs",
+      "bytes": 1913,
+      "digest": "030e24cec8899637",
+      "extension": ".mjs",
+      "imports": [
+        "./projectReadiness.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/projectStore.server.js",
+      "bytes": 2583,
+      "digest": "305f8955a497fd8f",
+      "extension": ".js",
+      "imports": [
+        "./supabaseStore.server.js",
+        "node:crypto",
+        "node:fs/promises",
+        "node:path"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/projectStore.server.test.mjs",
+      "bytes": 1668,
+      "digest": "2aa9d1fb92639f29",
+      "extension": ".mjs",
+      "imports": [
+        "./projectStore.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providerFactory.server.js",
+      "bytes": 1333,
+      "digest": "55e99df301d9ce2f",
+      "extension": ".js",
+      "imports": [
+        "./providers/anthropic.server.js",
+        "./providers/gemini.server.js",
+        "./providers/localOpenAI.server.js",
+        "./providers/ollama.server.js",
+        "./providers/openai.server.js",
+        "./providers/xai.server.js"
+      ],
+      "exports": [
+        "createConfiguredProvider",
+        "isModelBackedProvider"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providerProbeStore.server.js",
+      "bytes": 14042,
+      "digest": "f818c3bb11c2032a",
+      "extension": ".js",
+      "imports": [
+        "./providers/anthropic.server.js",
+        "./providers/gemini.server.js",
+        "./providers/localOpenAI.server.js",
+        "./providers/ollama.server.js",
+        "./providers/openai.server.js",
+        "./providers/xai.server.js",
+        "node:fs/promises",
+        "node:path"
+      ],
+      "exports": [
+        "CLOUD_PROBE_DEFINITIONS",
+        "PROBE_DEFINITIONS",
+        "async",
+        "getProviderProbePath",
+        "providerProbeCacheKey"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providerProbeStore.server.test.mjs",
+      "bytes": 4552,
+      "digest": "2b23473767160d30",
+      "extension": ".mjs",
+      "imports": [
+        "./providerProbeStore.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providerRegistry.server.js",
+      "bytes": 5810,
+      "digest": "adeb16854ce96166",
+      "extension": ".js",
+      "imports": [
+        "./providerProbeStore.server.js"
+      ],
+      "exports": [
+        "async",
+        "evaluateProvider"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providerRegistry.server.test.mjs",
+      "bytes": 3954,
+      "digest": "49e88b23ddce0cff",
+      "extension": ".mjs",
+      "imports": [
+        "./providerRegistry.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/anthropic.server.js",
+      "bytes": 7235,
+      "digest": "6081e7abc9715b60",
+      "extension": ".js",
+      "imports": [
+        "./openai.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "createAnthropicProvider"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/anthropic.server.test.mjs",
+      "bytes": 2337,
+      "digest": "b915dfe10bc00b56",
+      "extension": ".mjs",
+      "imports": [
+        "./anthropic.server.js",
+        "./openai.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/gemini.server.js",
+      "bytes": 7562,
+      "digest": "8d7850983c32c563",
+      "extension": ".js",
+      "imports": [
+        "./openai.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "createGeminiProvider"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/gemini.server.test.mjs",
+      "bytes": 2461,
+      "digest": "8be4036e253ca13e",
+      "extension": ".mjs",
+      "imports": [
+        "./gemini.server.js",
+        "./openai.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/localOpenAI.server.js",
+      "bytes": 4908,
+      "digest": "ae2710af8ffe22f0",
+      "extension": ".js",
+      "imports": [
+        "./openai.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "createLocalOpenAIProvider"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/localOpenAI.server.test.mjs",
+      "bytes": 2165,
+      "digest": "d5b30ee7e64372ca",
+      "extension": ".mjs",
+      "imports": [
+        "./localOpenAI.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/ollama.server.js",
+      "bytes": 3946,
+      "digest": "43cf7a8b79c003e4",
+      "extension": ".js",
+      "imports": [
+        "./openai.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "createOllamaProvider"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/openai.server.js",
+      "bytes": 7843,
+      "digest": "bedbe11df1191ce1",
+      "extension": ".js",
+      "imports": [
+        "node:crypto"
+      ],
+      "exports": [
+        "ProviderError",
+        "createOpenAIProvider"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/openai.server.test.mjs",
+      "bytes": 3144,
+      "digest": "fb8cf42a4ba97716",
+      "extension": ".mjs",
+      "imports": [
+        "./openai.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/xai.server.js",
+      "bytes": 6822,
+      "digest": "742d7c1edbdb5897",
+      "extension": ".js",
+      "imports": [
+        "./openai.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "createXaiProvider"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/providers/xai.server.test.mjs",
+      "bytes": 2337,
+      "digest": "a45e8fac95fd175c",
+      "extension": ".mjs",
+      "imports": [
+        "./openai.server.js",
+        "./xai.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runAdmission.server.js",
+      "bytes": 3256,
+      "digest": "ec2e1b06c2fcfbb7",
+      "extension": ".js",
+      "imports": [
+        "./executionContext.server.js",
+        "./governance.server.js",
+        "./projectReadiness.server.js",
+        "./runBudget.server.js",
+        "./runStore.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runAdmission.server.test.mjs",
+      "bytes": 5348,
+      "digest": "b0dc77a715c38bb3",
+      "extension": ".mjs",
+      "imports": [
+        "./runAdmission.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runBudget.server.js",
+      "bytes": 3261,
+      "digest": "4371fd741ef02587",
+      "extension": ".js",
+      "imports": [],
+      "exports": [
+        "calculateUsageCost",
+        "collectRunUsage",
+        "evaluateRunBudget",
+        "getProviderPricing"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runBudget.server.test.mjs",
+      "bytes": 2598,
+      "digest": "d54b5599bdac325b",
+      "extension": ".mjs",
+      "imports": [
+        "./runBudget.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runLease.server.js",
+      "bytes": 2873,
+      "digest": "ca5b976148d339f2",
+      "extension": ".js",
+      "imports": [
+        "../server/telemetry.js",
+        "./supabaseStore.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "publicLease"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runLease.server.test.mjs",
+      "bytes": 2027,
+      "digest": "68f1a06db71a079b",
+      "extension": ".mjs",
+      "imports": [
+        "./runLease.server.js",
+        "./supabaseStore.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runPreflight.server.js",
+      "bytes": 7159,
+      "digest": "e03c2fc0360b4952",
+      "extension": ".js",
+      "imports": [
+        "./agentPipeline.server.js",
+        "./providerFactory.server.js",
+        "./runStore.server.js",
+        "./runtime.js",
+        "./supabaseStore.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "fingerprintPlan",
+        "validateApprovalToken"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runPreflight.server.test.mjs",
+      "bytes": 4893,
+      "digest": "b13418c7bed49cae",
+      "extension": ".mjs",
+      "imports": [
+        "./runPreflight.server.js",
+        "./runStore.server.js",
+        "./runStream.server.js",
+        "./supabaseStore.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runStore.server.js",
+      "bytes": 9373,
+      "digest": "6498c0f62fda3ccc",
+      "extension": ".js",
+      "imports": [
+        "./autonomyPolicy.js",
+        "./projectStore.server.js",
+        "./runtime.js",
+        "./settingsStore.server.js",
+        "./supabaseStore.server.js",
+        "./toolRegistry.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "buildLedgerFromRun",
+        "normalizeTaskInput"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runStore.server.test.mjs",
+      "bytes": 4375,
+      "digest": "3132088bf46363f5",
+      "extension": ".mjs",
+      "imports": [
+        "./runStore.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runStream.server.js",
+      "bytes": 19231,
+      "digest": "9164eacd9c467933",
+      "extension": ".js",
+      "imports": [
+        "../server/telemetry.js",
+        "./agentPipeline.server.js",
+        "./memoryStore.server.js",
+        "./providerFactory.server.js",
+        "./runBudget.server.js",
+        "./runLease.server.js",
+        "./runStore.server.js",
+        "./runtime.js",
+        "./toolRegistry.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "createApprovedRunEventStream",
+        "createResumeEventStream",
+        "createRunEventStream"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runStream.server.test.mjs",
+      "bytes": 12933,
+      "digest": "1ad5ebc9728f0f8b",
+      "extension": ".mjs",
+      "imports": [
+        "../server/telemetry.js",
+        "./runStore.server.js",
+        "./runStream.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runtime.js",
+      "bytes": 8852,
+      "digest": "f412b56ad18638a2",
+      "extension": ".js",
+      "imports": [
+        "./autonomyPolicy.js"
+      ],
+      "exports": [
+        "capabilityBadges",
+        "createAgentRun",
+        "defaultAgentConfig",
+        "domainModules",
+        "validateToolCall"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/runtime.test.mjs",
+      "bytes": 2245,
+      "digest": "4ccfa5efb0cae8b7",
+      "extension": ".mjs",
+      "imports": [
+        "./runtime.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/settingsStore.server.js",
+      "bytes": 4613,
+      "digest": "bbdb7174efe1671c",
+      "extension": ".js",
+      "imports": [
+        "./runtime.js",
+        "./supabaseStore.server.js"
+      ],
+      "exports": [
+        "async",
+        "normalizeAgentSettings",
+        "settingsToRunConfig"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/settingsStore.server.test.mjs",
+      "bytes": 3040,
+      "digest": "ad09959c022b6b59",
+      "extension": ".mjs",
+      "imports": [
+        "./runStore.server.js",
+        "./settingsStore.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/sourceWrite.server.js",
+      "bytes": 2282,
+      "digest": "cf2697e34a384c28",
+      "extension": ".js",
+      "imports": [
+        "./settingsStore.server.js",
+        "./toolRegistry.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "getSourceWriteApprovalPhrase"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/sourceWrite.server.test.mjs",
+      "bytes": 2024,
+      "digest": "38a85aea4cc3d204",
+      "extension": ".mjs",
+      "imports": [
+        "./sourceWrite.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/supabaseMigration.server.test.mjs",
+      "bytes": 14546,
+      "digest": "544d0735e26b2b40",
+      "extension": ".mjs",
+      "imports": [
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/supabaseStore.server.js",
+      "bytes": 22361,
+      "digest": "304820edfd78a2c9",
+      "extension": ".js",
+      "imports": [
+        "../server/tenantContext.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "clearSupabaseTestState",
+        "createSupabaseApprovalStore",
+        "createSupabaseLeaseStore",
+        "createSupabaseMemoryStore",
+        "createSupabaseProjectStore",
+        "createSupabaseRunStore",
+        "getSupabaseConfig",
+        "isSupabaseTestMode"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/supabaseStore.server.test.mjs",
+      "bytes": 9230,
+      "digest": "926bacdd6b172409",
+      "extension": ".mjs",
+      "imports": [
+        "../server/tenantContext.js",
+        "./supabaseStore.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/taskGraph.server.js",
+      "bytes": 2937,
+      "digest": "71541799ca460df2",
+      "extension": ".js",
+      "imports": [],
+      "exports": [
+        "deriveTaskGraph"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/taskGraph.server.test.mjs",
+      "bytes": 2260,
+      "digest": "cb6b6440692c7374",
+      "extension": ".mjs",
+      "imports": [
+        "./runtime.js",
+        "./taskGraph.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/toolRegistry.server.js",
+      "bytes": 16891,
+      "digest": "cde7e3a0fb98bb58",
+      "extension": ".js",
+      "imports": [
+        "./executionContext.server.js",
+        "./impactAnalyzer.server.js",
+        "./runtime.js",
+        "node:child_process",
+        "node:crypto",
+        "node:fs/promises",
+        "node:path",
+        "node:util"
+      ],
+      "exports": [
+        "async",
+        "resolveArtifactPath",
+        "resolveSourceWritePath",
+        "resolveWorkspacePath"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/agent/toolRegistry.server.test.mjs",
+      "bytes": 8875,
+      "digest": "3de166a77dece159",
+      "extension": ".mjs",
+      "imports": [
+        "./executionContext.server.js",
+        "./runtime.js",
+        "./toolRegistry.server.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/components/AppShell.svelte",
+      "bytes": 3270,
+      "digest": "2c230faea3ff6a5b",
+      "extension": ".svelte",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/index.js",
+      "bytes": 1241,
+      "digest": "0dd5c310838947da",
+      "extension": ".js",
+      "imports": [
+        "./agent/runtime.js"
+      ],
+      "exports": [
+        "default",
+        "projectSignals",
+        "qualityGates",
+        "workflowSteps"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/auditStore.server.js",
+      "bytes": 3099,
+      "digest": "e800c10385163ea4",
+      "extension": ".js",
+      "imports": [
+        "../agent/supabaseStore.server.js"
+      ],
+      "exports": [
+        "async",
+        "auditRoute",
+        "createAuditStore"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/auditStore.server.test.mjs",
+      "bytes": 1855,
+      "digest": "b9254224ecc7d83a",
+      "extension": ".mjs",
+      "imports": [
+        "./auditStore.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/federatedAccess.js",
+      "bytes": 867,
+      "digest": "47387daed81650b6",
+      "extension": ".js",
+      "imports": [],
+      "exports": [
+        "authorizeOidcMember",
+        "authorizeOidcOrganization"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/federatedAccess.test.mjs",
+      "bytes": 1238,
+      "digest": "52bc507f77690edf",
+      "extension": ".mjs",
+      "imports": [
+        "./federatedAccess.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/identityLifecycleStore.server.js",
+      "bytes": 5632,
+      "digest": "1d3e0cd9accc4cf9",
+      "extension": ".js",
+      "imports": [
+        "../agent/supabaseStore.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "createIdentityLifecycleStore",
+        "createTenantIdentityLifecycleStore"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/identityLifecycleStore.server.test.mjs",
+      "bytes": 3756,
+      "digest": "2e58adca9ec9e709",
+      "extension": ".mjs",
+      "imports": [
+        "./identityLifecycleStore.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/identityStore.server.js",
+      "bytes": 6012,
+      "digest": "367c6ef3322fe098",
+      "extension": ".js",
+      "imports": [
+        "../agent/supabaseStore.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "createIdentityStore"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/identityStore.server.test.mjs",
+      "bytes": 6162,
+      "digest": "03c53e2463fc98a8",
+      "extension": ".mjs",
+      "imports": [
+        "./identityStore.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/loginPresentation.js",
+      "bytes": 849,
+      "digest": "dae90bafdbe25ddf",
+      "extension": ".js",
+      "imports": [],
+      "exports": [
+        "accessPresentation"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/loginPresentation.test.mjs",
+      "bytes": 922,
+      "digest": "0cc538d993900867",
+      "extension": ".mjs",
+      "imports": [
+        "./loginPresentation.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/oidc.server.js",
+      "bytes": 9722,
+      "digest": "6f87e9e708d6b095",
+      "extension": ".js",
+      "imports": [
+        "jose",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "createOidcAuthorization",
+        "oidcConfig",
+        "oidcConfigFingerprint",
+        "oidcConfigFromValues",
+        "oidcCookieOptions",
+        "openOidcTransaction",
+        "sealOidcTransaction",
+        "validateOidcConfigFingerprint",
+        "validateOidcState"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/oidc.server.test.mjs",
+      "bytes": 5206,
+      "digest": "dabc7d4a7f1e3bfc",
+      "extension": ".mjs",
+      "imports": [
+        "./oidc.server.js",
+        "jose",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/oidcConnectionStore.server.js",
+      "bytes": 5969,
+      "digest": "2fb596cc107adf71",
+      "extension": ".js",
+      "imports": [
+        "../agent/supabaseStore.server.js",
+        "./oidc.server.js",
+        "./secretEnvelope.js"
+      ],
+      "exports": [
+        "async",
+        "createOidcConnectionStore"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/oidcConnectionStore.server.test.mjs",
+      "bytes": 6069,
+      "digest": "244bc4e65934f512",
+      "extension": ".mjs",
+      "imports": [
+        "./oidcConnectionStore.server.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/oidcSecretRotation.server.js",
+      "bytes": 1943,
+      "digest": "7404f6fc3e21a156",
+      "extension": ".js",
+      "imports": [
+        "./oidcConnectionStore.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/oidcSecretRotation.server.test.mjs",
+      "bytes": 1973,
+      "digest": "ca9eaecae839c736",
+      "extension": ".mjs",
+      "imports": [
+        "./oidcSecretRotation.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/organizationLifecycle.js",
+      "bytes": 799,
+      "digest": "6c17b62fc21324f0",
+      "extension": ".js",
+      "imports": [],
+      "exports": [
+        "authorizeOrganizationStatusChange"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/organizationLifecycle.test.mjs",
+      "bytes": 1201,
+      "digest": "e5c82f235ea3633c",
+      "extension": ".mjs",
+      "imports": [
+        "./organizationLifecycle.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/organizationStore.server.js",
+      "bytes": 2580,
+      "digest": "b26d11e7b49993fe",
+      "extension": ".js",
+      "imports": [
+        "../agent/supabaseStore.server.js"
+      ],
+      "exports": [
+        "createOrganizationStore"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/organizationStore.server.test.mjs",
+      "bytes": 3016,
+      "digest": "b094ef897f5478da",
+      "extension": ".mjs",
+      "imports": [
+        "./organizationStore.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/rateLimitStore.server.js",
+      "bytes": 1918,
+      "digest": "861bd0e96542f8eb",
+      "extension": ".js",
+      "imports": [
+        "../agent/supabaseStore.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "createDistributedRateLimitStore"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/rateLimitStore.server.test.mjs",
+      "bytes": 1056,
+      "digest": "784147be6037c26b",
+      "extension": ".mjs",
+      "imports": [
+        "./rateLimitStore.server.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/requestAdmission.js",
+      "bytes": 1928,
+      "digest": "5b311980754ec741",
+      "extension": ".js",
+      "imports": [],
+      "exports": [
+        "requestAdmissionConfig",
+        "requestAdmissionSnapshot",
+        "resetRequestAdmissionForTests",
+        "tryAcquireRequestSlot"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/requestAdmission.test.mjs",
+      "bytes": 2044,
+      "digest": "b59af796da066f0b",
+      "extension": ".mjs",
+      "imports": [
+        "./requestAdmission.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/scimProtocol.js",
+      "bytes": 3769,
+      "digest": "62f5db50d9aa62c8",
+      "extension": ".js",
+      "imports": [],
+      "exports": [
+        "SCIM_ERROR_SCHEMA",
+        "SCIM_LIST_SCHEMA",
+        "SCIM_PATCH_SCHEMA",
+        "SCIM_USER_SCHEMA",
+        "applyScimPatch",
+        "normalizeScimUser",
+        "parseScimFilter",
+        "publicScimUser",
+        "scimError"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/scimProtocol.test.mjs",
+      "bytes": 2321,
+      "digest": "24de120a508c02de",
+      "extension": ".mjs",
+      "imports": [
+        "./scimProtocol.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/scimRoutes.server.js",
+      "bytes": 750,
+      "digest": "ba1d10abc904b770",
+      "extension": ".js",
+      "imports": [
+        "./identityLifecycleStore.server.js",
+        "./scimProtocol.js"
+      ],
+      "exports": [
+        "scimFailure",
+        "scimJson",
+        "scimStore"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/secretEnvelope.js",
+      "bytes": 4279,
+      "digest": "a152c8490b4beec9",
+      "extension": ".js",
+      "imports": [
+        "node:crypto"
+      ],
+      "exports": [
+        "decryptTenantSecret",
+        "encryptTenantSecret",
+        "inspectTenantSecretEnvelope",
+        "secretsEncryptionKey",
+        "secretsEncryptionKeyring"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/secretEnvelope.test.mjs",
+      "bytes": 3088,
+      "digest": "068bbe9db5957523",
+      "extension": ".mjs",
+      "imports": [
+        "./secretEnvelope.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/security.js",
+      "bytes": 15319,
+      "digest": "e34febf09e4888f5",
+      "extension": ".js",
+      "imports": [
+        "./identityStore.server.js",
+        "./rateLimitStore.server.js",
+        "node:crypto"
+      ],
+      "exports": [
+        "async",
+        "authenticateCredential",
+        "authenticateRequest",
+        "authorizeRequest",
+        "consumeRateLimit",
+        "createSessionToken",
+        "securityConfig",
+        "securityHeaders",
+        "sessionCookieOptions",
+        "validateOrigin",
+        "verifySessionToken"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/security.test.mjs",
+      "bytes": 13281,
+      "digest": "caec3ba0800c338f",
+      "extension": ".mjs",
+      "imports": [
+        "./security.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/telemetry.js",
+      "bytes": 8541,
+      "digest": "10dba9139ffa8c50",
+      "extension": ".js",
+      "imports": [
+        "./requestAdmission.js",
+        "node:async_hooks",
+        "node:crypto"
+      ],
+      "exports": [
+        "createTraceContext",
+        "currentTelemetryContext",
+        "formatTraceparent",
+        "incrementMetric",
+        "logEvent",
+        "observeMetric",
+        "prometheusMetrics",
+        "setTelemetryContextFields",
+        "telemetrySnapshot",
+        "withTelemetryContext"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/telemetry.test.mjs",
+      "bytes": 3522,
+      "digest": "e200304a377a8793",
+      "extension": ".mjs",
+      "imports": [
+        "./telemetry.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/tenantContext.js",
+      "bytes": 751,
+      "digest": "9dcd21bc8ef94683",
+      "extension": ".js",
+      "imports": [
+        "node:async_hooks"
+      ],
+      "exports": [
+        "currentTenantContext",
+        "withTenantContext"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/server/tenantContext.test.mjs",
+      "bytes": 846,
+      "digest": "b859ba8599861158",
+      "extension": ".mjs",
+      "imports": [
+        "./tenantContext.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/lib/styles/component-tokens.css",
+      "bytes": 484,
+      "digest": "3d3d3d32a001ca9b",
+      "extension": ".css",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "lightweight-patterns"
+    },
+    {
+      "path": "src/lib/styles/semantic-tokens.css",
+      "bytes": 1999,
+      "digest": "4067d48a5eede2bb",
+      "extension": ".css",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "lightweight-patterns"
+    },
+    {
+      "path": "src/routes/+layout.server.js",
+      "bytes": 1144,
+      "digest": "5348313225a7bd89",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityStore.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/+layout.svelte",
+      "bytes": 213,
+      "digest": "f353110d64adeb91",
+      "extension": ".svelte",
+      "imports": [
+        "$lib/styles/component-tokens.css",
+        "$lib/styles/semantic-tokens.css",
+        "../../tokens.css",
+        "./layout.css"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/+page.server.js",
+      "bytes": 698,
+      "digest": "5920dff0945e9992",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/diagnostics.server.js",
+        "$lib/agent/projectStore.server.js",
+        "$lib/agent/providerRegistry.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/+page.svelte",
+      "bytes": 23675,
+      "digest": "b21e790543bf525e",
+      "extension": ".svelte",
+      "imports": [
+        "$lib"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/audit/+server.js",
+      "bytes": 569,
+      "digest": "7369afe5a98ae579",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/auditStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/identities/[id]/+server.js",
+      "bytes": 635,
+      "digest": "244be2a28c32dbb5",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/identities/+server.js",
+      "bytes": 1314,
+      "digest": "7edf62f77ce621e6",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityStore.server.js",
+        "@sveltejs/kit",
+        "node:crypto"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/invitations/[id]/+server.js",
+      "bytes": 696,
+      "digest": "750156c5d3afb881",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityLifecycleStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/invitations/+server.js",
+      "bytes": 1405,
+      "digest": "cea831117d3f0c01",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityLifecycleStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/memberships/[accountTenantId]/[identityId]/+server.js",
+      "bytes": 1332,
+      "digest": "e6d34af57371090a",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/memberships/+server.js",
+      "bytes": 1739,
+      "digest": "221ac47ec34c1259",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/scim/+server.js",
+      "bytes": 1717,
+      "digest": "63efa9461fb67263",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityLifecycleStore.server.js",
+        "@sveltejs/kit",
+        "node:crypto"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/admin/sso/+server.js",
+      "bytes": 3514,
+      "digest": "82dcc06bbdbfa25e",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/oidc.server.js",
+        "$lib/server/oidcConnectionStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/auth/oidc/callback/+server.js",
+      "bytes": 4182,
+      "digest": "61a14ca2b12baabb",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/federatedAccess.js",
+        "$lib/server/identityLifecycleStore.server.js",
+        "$lib/server/identityStore.server.js",
+        "$lib/server/oidc.server.js",
+        "$lib/server/oidcConnectionStore.server.js",
+        "$lib/server/security.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/auth/oidc/start/+server.js",
+      "bytes": 1821,
+      "digest": "2b9a0f007abeba92",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/oidc.server.js",
+        "$lib/server/oidcConnectionStore.server.js",
+        "$lib/server/organizationStore.server.js",
+        "$lib/server/security.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/auth/organization/+server.js",
+      "bytes": 2205,
+      "digest": "813276fc99f6cf24",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/identityStore.server.js",
+        "$lib/server/security.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/auth/session/+server.js",
+      "bytes": 1245,
+      "digest": "0e8b289665ebc842",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/security.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "DELETE",
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/automation/maintenance/+server.js",
+      "bytes": 362,
+      "digest": "0e2fa56e20ae6f0d",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/automation.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/diagnostics/+server.js",
+      "bytes": 278,
+      "digest": "7f2b7ed466a0ef86",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/diagnostics.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/governance/+server.js",
+      "bytes": 537,
+      "digest": "085fd3828a8ab4f8",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/governance.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/health/live/+server.js",
+      "bytes": 154,
+      "digest": "2b721df22177f56f",
+      "extension": ".js",
+      "imports": [
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/health/ready/+server.js",
+      "bytes": 335,
+      "digest": "bb28b85cdf4b6335",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/diagnostics.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/memories/[id]/+server.js",
+      "bytes": 491,
+      "digest": "ac9ccd164dde24d5",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/memoryStore.server.js",
+        "$lib/agent/projectStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/memories/+server.js",
+      "bytes": 1082,
+      "digest": "df8253af5e93041e",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/memoryStore.server.js",
+        "$lib/agent/projectStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/metrics/+server.js",
+      "bytes": 236,
+      "digest": "e19629263ca1368f",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/telemetry.js"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/modules/+server.js",
+      "bytes": 190,
+      "digest": "69ed5c15e2ad313e",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/moduleRegistry.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/operations/slo/+server.js",
+      "bytes": 356,
+      "digest": "619f2bb3f1029559",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/operationsReport.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/platform/organizations/[id]/+server.js",
+      "bytes": 1111,
+      "digest": "a420d57f59ff8e7d",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/organizationLifecycle.js",
+        "$lib/server/organizationStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/platform/organizations/+server.js",
+      "bytes": 2111,
+      "digest": "98f3fe6fcafdaa63",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/organizationStore.server.js",
+        "@sveltejs/kit",
+        "node:crypto"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/projects/[id]/readiness/+server.js",
+      "bytes": 368,
+      "digest": "431cd70a0f0b6e51",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/projectReadiness.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/projects/+server.js",
+      "bytes": 478,
+      "digest": "2c57286a0ac64be4",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/projectStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/providers/+server.js",
+      "bytes": 676,
+      "digest": "6eb0a5e370fdf3ff",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/providerRegistry.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/[id]/+server.js",
+      "bytes": 273,
+      "digest": "6178cb64de24dfab",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/[id]/approval/+server.js",
+      "bytes": 562,
+      "digest": "1db4df33ae95c1c6",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runPreflight.server.js",
+        "$lib/agent/runStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/[id]/events/+server.js",
+      "bytes": 349,
+      "digest": "63f70d0d9b35a6d4",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/[id]/export/+server.js",
+      "bytes": 442,
+      "digest": "441e4e15ff3b163e",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/auditExport.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/[id]/graph/+server.js",
+      "bytes": 355,
+      "digest": "f226a40b205f89d0",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runStore.server.js",
+        "$lib/agent/taskGraph.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/[id]/ledger/+server.js",
+      "bytes": 281,
+      "digest": "6f94cbe8c1bfb25a",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/+server.js",
+      "bytes": 943,
+      "digest": "af6d8a8b1ff21276",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runAdmission.server.js",
+        "$lib/agent/runPreflight.server.js",
+        "$lib/agent/runStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/preflight/+server.js",
+      "bytes": 682,
+      "digest": "9fafc04a9e2d38fe",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runAdmission.server.js",
+        "$lib/agent/runPreflight.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/resume/+server.js",
+      "bytes": 995,
+      "digest": "54053ff8789b1d50",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runAdmission.server.js",
+        "$lib/agent/runLease.server.js",
+        "$lib/agent/runStream.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/runs/stream/+server.js",
+      "bytes": 1477,
+      "digest": "6e7d8c7dc95024f3",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runAdmission.server.js",
+        "$lib/agent/runLease.server.js",
+        "$lib/agent/runPreflight.server.js",
+        "$lib/agent/runStream.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/scim/v2/ResourceTypes/+server.js",
+      "bytes": 529,
+      "digest": "62bfbd54d2cf5778",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/scimProtocol.js",
+        "$lib/server/scimRoutes.server.js"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/scim/v2/ResourceTypes/User/+server.js",
+      "bytes": 416,
+      "digest": "8327b0dda0595afb",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/scimProtocol.js",
+        "$lib/server/scimRoutes.server.js"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/scim/v2/Schemas/[id]/+server.js",
+      "bytes": 1327,
+      "digest": "cfb64eb4c29eaab9",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/scimProtocol.js",
+        "$lib/server/scimRoutes.server.js"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/scim/v2/Schemas/+server.js",
+      "bytes": 1317,
+      "digest": "7d3f3b6ae02de1b9",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/scimProtocol.js",
+        "$lib/server/scimRoutes.server.js"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/scim/v2/ServiceProviderConfig/+server.js",
+      "bytes": 707,
+      "digest": "ddf95850611bb82d",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/scimRoutes.server.js"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/scim/v2/Users/[id]/+server.js",
+      "bytes": 2121,
+      "digest": "ab63f9b7fc53d140",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/scimProtocol.js",
+        "$lib/server/scimRoutes.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/scim/v2/Users/+server.js",
+      "bytes": 1672,
+      "digest": "1ebb4ca021bd0831",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/scimProtocol.js",
+        "$lib/server/scimRoutes.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/settings/+server.js",
+      "bytes": 808,
+      "digest": "6af0ccbadcbc9689",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/projectStore.server.js",
+        "$lib/agent/settingsStore.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/api/source-writes/+server.js",
+      "bytes": 1224,
+      "digest": "819f454c7266d3ca",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/projectStore.server.js",
+        "$lib/agent/settingsStore.server.js",
+        "$lib/agent/sourceWrite.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/audit/+page.server.js",
+      "bytes": 623,
+      "digest": "2ba15045e102a04c",
+      "extension": ".js",
+      "imports": [
+        "$lib/server/auditStore.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/audit/+page.svelte",
+      "bytes": 3351,
+      "digest": "5839de2ee40146ad",
+      "extension": ".svelte",
+      "imports": [
+        "$lib/components/AppShell.svelte"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/layout.css",
+      "bytes": 78273,
+      "digest": "224f0c7887ec6004",
+      "extension": ".css",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "lightweight-patterns"
+    },
+    {
+      "path": "src/routes/login/+page.server.js",
+      "bytes": 2241,
+      "digest": "6d207fc361c6c745",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/supabaseStore.server.js",
+        "$lib/server/loginPresentation.js",
+        "$lib/server/oidc.server.js",
+        "$lib/server/oidcConnectionStore.server.js",
+        "$lib/server/security.js"
+      ],
+      "exports": [
+        "load"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/login/+page.svelte",
+      "bytes": 4744,
+      "digest": "1a8bb21e11bfa937",
+      "extension": ".svelte",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/modules/+page.server.js",
+      "bytes": 420,
+      "digest": "d332e1afae229277",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/moduleRegistry.server.js",
+        "$lib/agent/projectStore.server.js",
+        "$lib/agent/settingsStore.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/modules/+page.svelte",
+      "bytes": 2532,
+      "digest": "9cbdabc32c3658fb",
+      "extension": ".svelte",
+      "imports": [
+        "$lib/components/AppShell.svelte"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/operations/+page.server.js",
+      "bytes": 1090,
+      "digest": "fc97a04663383c0a",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/operationsReport.server.js",
+        "$lib/server/telemetry.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/operations/+page.svelte",
+      "bytes": 5314,
+      "digest": "e56d08e23e49efe9",
+      "extension": ".svelte",
+      "imports": [
+        "$lib/components/AppShell.svelte"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/runs/[id]/+page.server.js",
+      "bytes": 509,
+      "digest": "d300a90d09ba4c4e",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runStore.server.js",
+        "$lib/agent/taskGraph.server.js",
+        "@sveltejs/kit"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/runs/[id]/+page.svelte",
+      "bytes": 4422,
+      "digest": "2a801deb246ece97",
+      "extension": ".svelte",
+      "imports": [
+        "$lib/components/AppShell.svelte"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/runs/+page.server.js",
+      "bytes": 168,
+      "digest": "5a85eb463312f405",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/runStore.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/runs/+page.svelte",
+      "bytes": 2917,
+      "digest": "4d5b1aff1a9a2965",
+      "extension": ".svelte",
+      "imports": [
+        "$lib/components/AppShell.svelte"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/settings/+page.server.js",
+      "bytes": 3306,
+      "digest": "f10419cb63fe8179",
+      "extension": ".js",
+      "imports": [
+        "$lib/agent/projectStore.server.js",
+        "$lib/agent/providerRegistry.server.js",
+        "$lib/agent/settingsStore.server.js",
+        "$lib/server/identityLifecycleStore.server.js",
+        "$lib/server/identityStore.server.js",
+        "$lib/server/oidc.server.js",
+        "$lib/server/oidcConnectionStore.server.js",
+        "$lib/server/organizationStore.server.js"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "src/routes/settings/+page.svelte",
+      "bytes": 33387,
+      "digest": "654e03e4abda318c",
+      "extension": ".svelte",
+      "imports": [
+        "$lib/components/AppShell.svelte"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "static/favicon.svg",
+      "bytes": 1569,
+      "digest": "c98c37cbc0242b2c",
+      "extension": ".svg",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "lightweight-patterns"
+    },
+    {
+      "path": "tools/ai-system/cli.mjs",
+      "bytes": 1202,
+      "digest": "913ebe1ac0686646",
+      "extension": ".mjs",
+      "imports": [
+        "./core.mjs"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/ai-system/core.mjs",
+      "bytes": 12821,
+      "digest": "c6066e51986459c7",
+      "extension": ".mjs",
+      "imports": [
+        "node:crypto",
+        "node:fs/promises",
+        "node:path",
+        "node:url",
+        "typescript",
+        "yaml",
+        "zod"
+      ],
+      "exports": [
+        "ROOT",
+        "aiSystemPlugin",
+        "assessComplexity",
+        "async",
+        "selectPolicies"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/ai-system/core.test.mjs",
+      "bytes": 2140,
+      "digest": "d56fd4515c29ad71",
+      "extension": ".mjs",
+      "imports": [
+        "./core.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/backup.sh",
+      "bytes": 1791,
+      "digest": "a941f7337a0765a4",
+      "extension": ".sh",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "lightweight-patterns"
+    },
+    {
+      "path": "tools/capacity-test.mjs",
+      "bytes": 4066,
+      "digest": "e2b95565a32779f3",
+      "extension": ".mjs",
+      "imports": [
+        "node:url",
+        "node:util"
+      ],
+      "exports": [
+        "async"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/capacity-test.test.mjs",
+      "bytes": 1416,
+      "digest": "0768fadabec846fa",
+      "extension": ".mjs",
+      "imports": [
+        "./capacity-test.mjs",
+        "node:assert/strict",
+        "node:http",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/check-design-tokens.mjs",
+      "bytes": 1504,
+      "digest": "a4f51711c4421c52",
+      "extension": ".mjs",
+      "imports": [
+        "node:fs/promises",
+        "node:path",
+        "node:url"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/create-operator-token.mjs",
+      "bytes": 1435,
+      "digest": "0071eb510f202d37",
+      "extension": ".mjs",
+      "imports": [
+        "node:crypto"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/deployment.test.mjs",
+      "bytes": 7044,
+      "digest": "8da70c395e04aed6",
+      "extension": ".mjs",
+      "imports": [
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:test",
+        "yaml"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/migrate.sh",
+      "bytes": 1273,
+      "digest": "6b5aa626dc7b1a0d",
+      "extension": ".sh",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "lightweight-patterns"
+    },
+    {
+      "path": "tools/project-mcp.mjs",
+      "bytes": 5579,
+      "digest": "c164c696a2e2e420",
+      "extension": ".mjs",
+      "imports": [
+        "./ai-system/core.mjs",
+        "@modelcontextprotocol/sdk/server/mcp.js",
+        "@modelcontextprotocol/sdk/server/stdio.js",
+        "node:fs/promises",
+        "node:path",
+        "zod"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/restore-verify.sh",
+      "bytes": 1524,
+      "digest": "3f1ecc423a072db7",
+      "extension": ".sh",
+      "imports": [],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "lightweight-patterns"
+    },
+    {
+      "path": "tools/rotate-oidc-secrets.mjs",
+      "bytes": 916,
+      "digest": "4a2ff2746df14b7b",
+      "extension": ".mjs",
+      "imports": [
+        "../src/lib/server/oidcSecretRotation.server.js"
+      ],
+      "exports": [],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/server.mjs",
+      "bytes": 4557,
+      "digest": "acbbc273266db7fd",
+      "extension": ".mjs",
+      "imports": [
+        "../build/handler.js",
+        "../src/lib/server/requestAdmission.js",
+        "node:http",
+        "node:url"
+      ],
+      "exports": [
+        "createManagedServer"
+      ],
+      "is_test": false,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    },
+    {
+      "path": "tools/server.test.mjs",
+      "bytes": 2415,
+      "digest": "2eb38a089069d277",
+      "extension": ".mjs",
+      "imports": [
+        "./server.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "exports": [],
+      "is_test": true,
+      "is_generated": false,
+      "analysis": "typescript-preprocess"
+    }
+  ]
+}

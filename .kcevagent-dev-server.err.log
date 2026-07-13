@@ -1,0 +1,63 @@
+[2m1:05:08 AM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: Cannot read properties of undefined (reading 'enabled')
+
+	in <unknown>
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+[39m > src/routes/login/+page.svelte:34:17
+    32 |  			{#if errorMessage}<p class="error-message" role="alert">{errorMessage}</p>{/if}
+    33 |  		</form>
+    34 |  		{#if data.oidc.enabled}<div class="auth-divider"><span>or</span></div><a class="auth-sso" href="/api/auth/oidc/star...
+       |                   ^
+    35 |  		<footer><span>Your access token is exchanged for a signed HttpOnly session and is not stored in the browser.</span>...
+    36 |  	</section>
+ > node_modules/svelte/src/internal/client/dom/blocks/if.js:63:2
+ > update_reaction node_modules/svelte/src/internal/client/runtime.js:256:15
+ > update_effect node_modules/svelte/src/internal/client/runtime.js:465:17
+ > create_effect node_modules/svelte/src/internal/client/reactivity/effects.js:137:3
+ > block node_modules/svelte/src/internal/client/reactivity/effects.js:414:14
+ > Module.if_block node_modules/svelte/src/internal/client/dom/blocks/if.js:60:1
+ > src/routes/login/+page.svelte?t=1783897508054:133:14
+ > Module.add_svelte_meta node_modules/svelte/src/internal/client/context.js:49:9
+ > _page src/routes/login/+page.svelte?t=1783897508054:132:5
+
+{"timestamp":"2026-07-12T23:41:03.095Z","level":"error","event":"rate_limit_backend_failed","traceId":"25bc452010f13004b5237c68b8a78557","spanId":"333e9e0c69dbfdc0","traceFlags":"01","parentSpanId":null,"requestId":"165ff697-9d16-4cb8-a4ae-898ffb23a516","error":"Distributed rate limiter rejected the request."}
+{"timestamp":"2026-07-12T23:41:03.252Z","level":"error","event":"rate_limit_backend_failed","traceId":"98a474af101cfda2d6c61bf04cc9181e","spanId":"38d3ed007ae04868","traceFlags":"01","parentSpanId":null,"requestId":"1f1f074f-d41d-4aed-a84c-b719e0f5dbd6","error":"Distributed rate limiter rejected the request."}
+mous>:397:28)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at with_request_store (file:///C:/Users/GCJR/Documents/Code%20WorkSpace/KcevAgent-main/KcevAgent-main/node_modules/@sveltejs/kit/src/exports/internal/event.js:77:20)
+    at fn (eval at runInlinedModule (file:///C:/Users/GCJR/Documents/Code%20WorkSpace/KcevAgent-main/KcevAgent-main/node_modules/vite/dist/node/module-runner.js:1006:9), <anonymous>:394:62)
+    at record_span (eval at runInlinedModule (file:///C:/Users/GCJR/Documents/Code%20WorkSpace/KcevAgent-main/KcevAgent-main/node_modules/vite/dist/node/module-runner.js:1006:9), <anonymous>:16:10)
+    at handle (eval at runInlinedModule (file:///C:/Users/GCJR/Documents/Code%20WorkSpace/KcevAgent-main/KcevAgent-main/node_modules/vite/dist/node/module-runner.js:1006:9), <anonymous>:376:64)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Object.before_handle (file:///C:/Users/GCJR/Documents/Code%20WorkSpace/KcevAgent-main/KcevAgent-main/node_modules/@sveltejs/kit/src/exports/vite/dev/index.js:574:40)
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+Avoid calling `fetch` eagerly during server-side rendering — put your `fetch` calls inside `onMount` or a `load` function instead
+{"timestamp":"2026-07-12T23:41:02.639Z","level":"error","event":"rate_limit_backend_failed","traceId":"29247a27542504bfb26bdc158da686bb","spanId":"dfdf7048cafb9bec","traceFlags":"01","parentSpanId":null,"requestId":"c33e59e2-2110-4ecd-a97e-ddad7d9dae7f","error":"Distributed rate limiter rejected the request."}
+{"timestamp":"2026-07-12T23:41:02.640Z","level":"error","event":"rate_limit_backend_failed","traceId":"2bd2343a18667ed180ac7496ddb16e48","spanId":"c7a3d2d1b16820e9","traceFlags":"01","parentSpanId":null,"requestId":"504eb71e-d310-4014-b232-b17e242967e8","error":"Distributed rate limiter rejected the request."}
+{"timestamp":"2026-07-12T23:41:02.790Z","level":"error","event":"rate_limit_backend_failed","traceId":"548fa6e4ea0819873f36dc89cc11b1b5","spanId":"f688e27247f46055","traceFlags":"01","parentSpanId":null,"requestId":"e4f10c8d-211f-49d4-b63e-4c73985747fd","error":"Distributed rate limiter rejected the request."}

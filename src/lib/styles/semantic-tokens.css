@@ -1,0 +1,50 @@
+:root {
+	--surface-canvas: var(--color-neutral-50);
+	--surface-primary: var(--color-neutral-0);
+	--surface-secondary: var(--color-neutral-100);
+	--surface-inverse: var(--color-neutral-950);
+	--text-primary: var(--color-neutral-950);
+	--text-secondary: var(--color-neutral-600);
+	--text-tertiary: var(--color-neutral-500);
+	--text-inverse: var(--color-neutral-0);
+	--border-subtle: var(--color-neutral-200);
+	--border-strong: var(--color-neutral-400);
+	--action-primary: var(--color-brand-700);
+	--action-primary-hover: var(--color-brand-800);
+	--action-muted: var(--color-brand-50);
+	--focus-ring: var(--color-blue-500);
+	--state-success: var(--color-success-700);
+	--state-success-surface: var(--color-success-50);
+	--state-warning: var(--color-warning-700);
+	--state-warning-surface: var(--color-warning-50);
+	--state-danger: var(--color-danger-600);
+	--state-danger-surface: var(--color-danger-50);
+	--control-height: var(--dimension-40);
+	--sidebar-width: var(--dimension-224);
+	--inspector-width: var(--dimension-340);
+	--content-max: var(--dimension-1440);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--surface-canvas: var(--color-neutral-950);
+		--surface-primary: var(--color-neutral-900);
+		--surface-secondary: var(--color-neutral-850);
+		--surface-inverse: var(--color-neutral-0);
+		--text-primary: var(--color-neutral-50);
+		--text-secondary: var(--color-neutral-300);
+		--text-tertiary: var(--color-neutral-400);
+		--text-inverse: var(--color-neutral-950);
+		--border-subtle: var(--color-neutral-800);
+		--border-strong: var(--color-neutral-600);
+		--action-primary: var(--color-brand-400);
+		--action-primary-hover: var(--color-brand-300);
+		--action-muted: var(--color-brand-950);
+		--state-success: var(--color-success-400);
+		--state-success-surface: var(--color-success-950);
+		--state-warning: var(--color-warning-300);
+		--state-warning-surface: var(--color-warning-950);
+		--state-danger: var(--color-danger-300);
+		--state-danger-surface: var(--color-danger-950);
+	}
+}
