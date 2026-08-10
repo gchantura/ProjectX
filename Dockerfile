@@ -1,11 +1,11 @@
-FROM node:24.13.0-bookworm-slim AS build
+FROM node:26.7.0-bookworm-slim AS build
 WORKDIR /app
 COPY package.json package-lock.json .npmrc ./
 RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:24.13.0-bookworm-slim AS runtime
+FROM node:26.7.0-bookworm-slim AS runtime
 LABEL org.opencontainers.image.title="KcevAgent" \
       org.opencontainers.image.description="Governed enterprise agent operations platform"
 ENV NODE_ENV=production \
